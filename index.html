@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Behind The Scenes — Uditi Bokolia</title>
+<meta name="description" content="Uditi Bokolia, social media manager and designer. Social media, AI content, creative direction, design and video work.">
+<meta property="og:title" content="Behind The Scenes — Uditi Bokolia">
+<meta property="og:description" content="Social media manager & designer. Open the photos to see the work.">
+<meta name="theme-color" content="#f3efe4">
+<link rel="icon" type="image/png" sizes="64x64" href="media/home/favicon-64.png">
+<link rel="icon" type="image/png" sizes="32x32" href="media/home/favicon-32.png">
+<link rel="apple-touch-icon" href="media/home/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=IBM+Plex+Mono:wght@400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div id="wallpaper" aria-hidden="true"></div>
+
+  <header id="menubar">
+    <div class="mb-left">
+      <button class="mb-brand" data-action="help" aria-label="About this site">
+        <img class="mb-logo" src="media/home/logo.png" alt="" draggable="false">
+        <span>Behind The Scenes <span class="mb-by">by Uditi</span></span>
+      </button>
+    </div>
+    <div class="mb-right">
+      <button class="mb-icon" data-spot aria-label="Search the work (⌘K)">
+        <svg viewBox="0 0 16 16"><circle cx="6.6" cy="6.6" r="4.6" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="m10.2 10.2 4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+      </button>
+      <span class="mb-icon" aria-hidden="true">
+        <svg class="ic-wifi" viewBox="0 0 20 15" aria-hidden="true"><path d="M10 14.2L7.03 11.23A4.2 4.2 0 0 1 12.97 11.23Z" fill="currentColor" stroke="currentColor" stroke-width="1" stroke-linejoin="round"/><path d="M4.41 8.61A7.9 7.9 0 0 1 15.59 8.61" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round"/><path d="M1.80 6.00A11.6 11.6 0 0 1 18.20 6.00" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round"/></svg>
+      </span>
+      <button class="mb-icon" data-action="battery" aria-label="Battery">
+        <svg class="ic-batt" viewBox="0 0 30 14" aria-hidden="true"><rect x="1" y="1.2" width="24.5" height="11.6" rx="3.4" fill="none" stroke="currentColor" stroke-width="1.6"/><rect x="3.4" y="3.6" width="10" height="6.8" rx="1.4" fill="currentColor"/><path d="M27.6 5.2v3.6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      </button>
+      <span id="clock"></span>
+    </div>
+  </header>
+
+  <main id="desktop" aria-label="Portfolio desktop">
+    <div id="stage">
+      <section id="booth" aria-label="Photo Booth">
+        <div class="booth-bar"><span class="booth-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="booth-title">Photo Booth</span></div>
+        <div class="booth-view">
+          <button class="booth-shot" aria-label="About Uditi"><img alt="Uditi Bokolia"></button>
+          <video class="booth-video" muted loop playsinline hidden></video>
+          <div class="booth-flash"></div>
+        </div>
+        <div class="booth-foot">
+          <button class="booth-thumb" aria-label="Previous photo"><img alt=""></button>
+          <button class="booth-shutter" aria-label="Take a photo">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8.5A2.5 2.5 0 0 1 6.5 6h1.7l1.3-2h5l1.3 2h1.7A2.5 2.5 0 0 1 20 8.5v8a2.5 2.5 0 0 1-2.5 2.5h-11A2.5 2.5 0 0 1 4 16.5z" fill="none" stroke="#fff" stroke-width="1.8"/><circle cx="12" cy="12.5" r="3.3" fill="none" stroke="#fff" stroke-width="1.8"/></svg>
+          </button>
+          <button class="booth-mode" aria-pressed="false">video</button>
+          <svg class="booth-cursor" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 2.5v17.2l4.3-4.1 2.9 6.6 2.8-1.2-2.9-6.5h6z" fill="#fff" stroke="#111" stroke-width="1.3" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="note" role="alertdialog" aria-labelledby="noteTitle">
+          <div class="note-body">
+            <h2 id="noteTitle"></h2>
+            <p>“Every post has a story behind it.”</p>
+          </div>
+          <div class="note-btns"><button data-note="hi">Say hi</button><button data-note="close" class="strong">Close</button></div>
+        </div>
+      </section>
+      <div id="icons" role="list"></div>
+    </div>
+  </main>
+
+  <div id="windows"></div>
+
+  <nav id="dock" aria-label="Dock">
+    <div class="dock-inner">
+      <button class="dock-item" data-action="work" data-label="Finder">
+        <span class="app-icon real"><img src="media/dock/finder.png" alt="" draggable="false"></span>
+      </button>
+      <a class="dock-item" data-href-key="linkedin" target="_blank" rel="noopener" data-label="LinkedIn">
+        <span class="app-icon real"><svg viewBox="0 0 256 256" aria-hidden="true"><rect x="25" y="25" width="206" height="206" rx="47" fill="#0a66c2"/><circle cx="86" cy="84" r="15" fill="#fff"/><rect x="72" y="108" width="28" height="82" rx="2" fill="#fff"/><path d="M116 108h27v12c5-9 16-15 30-15 28 0 34 18 34 42v43h-28v-38c0-10-.2-23-14-23-14 0-16.5 11-16.5 22v39H116z" fill="#fff"/></svg></span>
+      </a>
+      <button class="dock-item hide-sm" data-action="mail" data-label="Messages">
+        <span class="app-icon real"><img src="media/dock/messages.png" alt="" draggable="false"></span>
+      </button>
+      <button class="dock-item" data-action="bts" data-label="Photos">
+        <span class="app-icon real"><img src="media/dock/photos.png" alt="" draggable="false"></span>
+      </button>
+      <button class="dock-item" data-action="about" data-label="Notes">
+        <span class="app-icon real"><img src="media/dock/notes.png" alt="" draggable="false"></span>
+      </button>
+      <button class="dock-item hide-sm" data-action="claude" data-label="Claude">
+        <span class="app-icon real"><img src="media/dock/claude.png" alt="" draggable="false"></span>
+      </button>
+      <button class="dock-item hide-sm" data-action="spotify" data-label="Spotify">
+        <span class="app-icon real"><img src="media/dock/spotify.png" alt="" draggable="false"></span>
+      </button>
+      <a class="dock-item" data-href-key="instagram" target="_blank" rel="noopener" data-label="Instagram">
+        <span class="app-icon real"><svg viewBox="0 0 256 256" aria-hidden="true"><defs><radialGradient id="igG" cx="30%" cy="107%" r="150%"><stop offset="0" stop-color="#fdf497"/><stop offset=".05" stop-color="#fdf497"/><stop offset=".45" stop-color="#fd5949"/><stop offset=".6" stop-color="#d6249f"/><stop offset=".9" stop-color="#285aeb"/></radialGradient></defs><rect x="25" y="25" width="206" height="206" rx="47" fill="url(#igG)"/><rect x="72" y="72" width="112" height="112" rx="32" fill="none" stroke="#fff" stroke-width="14"/><circle cx="128" cy="128" r="27" fill="none" stroke="#fff" stroke-width="14"/><circle cx="160" cy="96" r="8.5" fill="#fff"/></svg></span>
+      </a>
+      <a class="dock-item" data-href-key="pinterest" target="_blank" rel="noopener" data-label="Pinterest">
+        <span class="app-icon real"><svg viewBox="0 0 256 256" aria-hidden="true"><rect x="25" y="25" width="206" height="206" rx="47" fill="#fff"/><rect x="25.5" y="25.5" width="205" height="205" rx="46.5" fill="none" stroke="#000" stroke-opacity=".08"/><path transform="translate(42 42) scale(7.17)" fill="#e60023" d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.417 7.618 11.162-.105-.949-.199-2.403.041-3.439.219-.937 1.406-5.957 1.406-5.957s-.359-.72-.359-1.781c0-1.663.967-2.911 2.168-2.911 1.024 0 1.518.769 1.518 1.688 0 1.029-.653 2.567-.992 3.992-.285 1.193.6 2.165 1.775 2.165 2.128 0 3.768-2.245 3.768-5.487 0-2.861-2.063-4.869-5.008-4.869-3.41 0-5.409 2.562-5.409 5.199 0 1.033.394 2.143.889 2.741.099.12.112.225.085.345-.09.375-.293 1.199-.334 1.363-.053.225-.172.271-.401.165-1.495-.69-2.433-2.878-2.433-4.646 0-3.776 2.748-7.252 7.92-7.252 4.158 0 7.392 2.967 7.392 6.923 0 4.135-2.607 7.462-6.233 7.462-1.214 0-2.354-.629-2.758-1.379l-.749 2.848c-.269 1.045-1.004 2.352-1.498 3.146 1.123.345 2.306.535 3.55.535 6.607 0 11.985-5.365 11.985-11.987C23.97 5.39 18.592.026 11.985.026L12.017 0z"/></svg></span>
+      </a>
+      <a class="dock-item" data-href-key="whatsapp" target="_blank" rel="noopener" data-label="WhatsApp">
+        <span class="app-icon real"><img src="media/dock/whatsapp.png" alt="" draggable="false"></span>
+      </a>
+      <button class="dock-item" data-action="mail" data-label="Mail">
+        <span class="app-icon real"><img src="media/dock/mail.png" alt="" draggable="false"></span>
+      </button>
+      <span class="dock-sep hide-sm"></span>
+      <button class="dock-item hide-sm" data-action="trash" data-label="Bin">
+        <span class="app-icon real"><img src="media/dock/trash.png" alt="" draggable="false"></span>
+      </button>
+    </div>
+  </nav>
+
+  <div id="lightbox" hidden>
+    <div class="lb-bar">
+      <span class="lb-title"></span>
+      <span class="lb-count"></span>
+      <button class="lb-close" aria-label="Close preview">✕ Close</button>
+    </div>
+    <button class="lb-nav lb-prev" aria-label="Previous">‹</button>
+    <div class="lb-stage"></div>
+    <button class="lb-nav lb-next" aria-label="Next">›</button>
+  </div>
+
+  <div id="spotlight" hidden>
+    <div class="spot-box" role="dialog" aria-label="Search">
+      <label class="spot-input">
+        <svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="6.6" cy="6.6" r="4.6" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="m10.2 10.2 4 4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+        <input id="spotInput" type="text" placeholder="Search the work" aria-label="Search projects" autocomplete="off" spellcheck="false">
+      </label>
+      <ul class="spot-results" role="listbox"></ul>
+    </div>
+  </div>
+
+  <div id="toast" role="status" aria-live="polite"></div>
+
+  <div id="shield" hidden>
+    <div class="sh-name">Uditi<br>Bokolia</div>
+    <p>© All work protected</p>
+    <small>Click to keep browsing</small>
+  </div>
+
+  <noscript><p style="padding:60px 20px;font:16px system-ui">This portfolio needs JavaScript. Email uditi20bokolia@gmail.com.</p></noscript>
+
+  <script src="js/data-media.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
