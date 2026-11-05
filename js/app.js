@@ -1696,6 +1696,11 @@
       const el = makePage('ds', cat, `
         <div class="ds-row">${list.map((x, i) => { const c = project(x.project)?.cover || x.d.images[x.d.cover || 0]; return `<button class="ds-card" data-i="${i}" aria-label="${esc(x.name)}"><img src="${c.thumb || c.src}" alt="" draggable="false"></button>`; }).join('')}</div>`);
       const cards = [...el.querySelectorAll('.ds-card')];
+      // Speed: a deck's first image bundle starts downloading on hover/touch, and on fast connections as soon as
+      // the Design page opens, so the deck is usually ready by the time it is clicked.
+      const warmDeck = k => { const m = JSON.stringify([window.DS_LONG?.[k], window.DS_BLOOM?.[k], decks[k]]).match(/"c":"([\w-]+)"/); if (m) bundle(m[1]); };
+      cards.forEach((c, i) => ['pointerenter', 'touchstart', 'focus'].forEach(ev => c.addEventListener(ev, () => warmDeck(list[i].deck), { once: true, passive: true })));
+      if (fastNet()) el._t = setTimeout(() => list.forEach(x => warmDeck(x.deck)), 400);
       cards.forEach((c, i) => c.addEventListener('click', () => {
         const k = list[i].deck;
         (window.DS_LONG?.[k] ? openLong : window.DS_BLOOM?.[k] ? openBloom : openDeck)(el, k);
@@ -2085,6 +2090,32 @@ I saw your portfolio and </textarea>
     shield.addEventListener('click', () => cover(false));
     addEventListener('beforeprint', () => cover(true));
     addEventListener('afterprint', () => cover(false));
+  })();
+
+  /* ---------- Warm-up ----------
+     Once the desktop has loaded and the browser is idle, quietly download what each section shows the moment it
+     opens (covers, placards, posters), then, on fast connections, the next layer (Illustrations, Creative Direction
+     pages, the Kshitij Jalori grid). Sections then open from the cache instead of waiting on the network.
+     Skipped when the visitor has Data Saver on or is on a 2G/3G connection. */
+  function fastNet() { const c = navigator.connection || {}; return !c.saveData && !/(^|[^4])[23]g/.test(c.effectiveType || ''); }
+  (function warm() {
+    if (!fastNet()) return;
+    const seen = new Set(), first = [], next = [];
+    const add = (q, u) => { if (u && typeof u === 'string' && !u.startsWith('data:') && !seen.has(u)) { seen.add(u); q.push(u); } };
+    const still = it => it && (it.type === 'video' ? it.poster : it.src);
+    allProjects.forEach(id => add(first, still(project(id)?.cover)));
+    (window.SOCIAL || []).forEach(x => add(first, x.img));
+    (window.VN_PAGE?.cards || []).forEach(x => add(first, x.src));
+    ['video-editing', 'vnest', 'vn-tours'].forEach(id => (project(id)?.items || []).forEach(it => add(first, it.poster)));
+    (project('kj')?.items || []).forEach(it => add(next, still(it)));
+    (project('illustrations')?.items || []).slice(0, 12).forEach(it => add(next, still(it)));
+    Object.values(window.CD_LONG || {}).forEach(x => add(next, x.src));
+    const K = window.KJ_PAGE; if (K) [...K.grid1, ...K.grid2].slice(0, 9).forEach(x => add(next, x.src));
+    // Phones (usually on mobile data) only warm the first layer.
+    const q = matchMedia('(hover: hover) and (pointer: fine)').matches ? [...first, ...next] : first; let i = 0, live = 0;
+    const pump = () => { while (live < 3 && i < q.length) { const im = new Image(); live++; im.decoding = 'async'; im.onload = im.onerror = () => { live--; setTimeout(pump, 30); }; im.src = q[i++]; } };
+    const start = () => (window.requestIdleCallback || (f => setTimeout(f, 300)))(pump, { timeout: 2500 });
+    if (document.readyState === 'complete') setTimeout(start, 1200); else addEventListener('load', () => setTimeout(start, 1200), { once: true });
   })();
 
   /* ---------- Actions ---------- */
