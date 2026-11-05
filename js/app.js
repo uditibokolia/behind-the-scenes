@@ -1817,14 +1817,20 @@
         c.addEventListener('mouseenter', () => { if (mode !== 'fan') return; $('.cc-cap b', el).textContent = it.p.title; v?.play().catch(() => {}); c.classList.add('play'); });
         c.addEventListener('mouseleave', () => { v?.pause(); c.classList.remove('play'); });
         c.addEventListener('click', () => {
-          if (mode !== 'fan') { mode = 'fan'; place(); return; }
-          // Touch: the first tap lifts the card and plays it (as hovering does), the second opens the project.
-          if (coarse() && !c.classList.contains('play')) {
-            cards.forEach(o => { o.classList.remove('play', 'lift'); $('video', o)?.pause(); });
-            $('.cc-cap b', el).textContent = it.p.title; v?.play().catch(() => {}); c.classList.add('play', 'lift'); return;
-          }
-          pageProject(el, its[+c.dataset.k].p.id);
+          // One click or tap opens the piece full screen in the lightbox (videos play); the rest are a swipe away.
+          if (mode !== 'fan') { mode = 'fan'; place(); }
+          cards.forEach(o => { o.classList.remove('play', 'lift'); $('video', o)?.pause(); });
+          pageLB(it.p.title, its, +c.dataset.k);
         });
+      });
+      // The cards are tilted in 3D, so a tap near a card's edge can land on the row behind it: open the nearest card.
+      el.addEventListener('click', e => {
+        if (e.target.closest('.cc-card, button, a, nav')) return;
+        const rs = cards.map(c => [c.getBoundingClientRect(), c]);
+        const top = Math.min(...rs.map(([r]) => r.top)), bottom = Math.max(...rs.map(([r]) => r.bottom));
+        const left = Math.min(...rs.map(([r]) => r.left)), right = Math.max(...rs.map(([r]) => r.right));
+        if (e.clientY < top || e.clientY > bottom || e.clientX < left || e.clientX > right) return;
+        rs.sort((a, b) => Math.abs(e.clientX - (a[0].left + a[0].width / 2)) - Math.abs(e.clientX - (b[0].left + b[0].width / 2)))[0][1].click();
       });
       $('.cc-again', el).addEventListener('click', play);
       el._on(window, 'resize', place);

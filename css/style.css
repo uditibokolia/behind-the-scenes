@@ -1541,3 +1541,7 @@ button.mb-icon:hover { background: rgba(0, 0, 0, .06); }
 .pm-grid figcaption b { font-weight: 500; }
 .pm-grid figcaption span { color: #6b6a62; }
 .pm-note { grid-column: 1 / -1; margin: 4px 0 0; font-size: 11px; color: #6b6a62; }
+
+/* Mobile scrolling: pages taller than the screen must scroll. #pg locks overflow (for the fixed, full-screen pages),
+   which also overrode the scroll these pages ask for, so AI, Graphics and Video Editing could not scroll on phones. */
+#pg.pg-ai, #pg.pg-gx, #pg.pg-ve { overflow-x: hidden; overflow-y: auto; -webkit-overflow-scrolling: touch; overscroll-behavior: contain; }
